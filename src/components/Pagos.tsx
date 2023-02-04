@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import moment from "moment";
 
-import { iCredito } from "../interfaces/credits.interface";
+import { useParams } from "react-router-dom";
 
 import { usePagos } from "../hooks/usePagos";
 import { iPago } from "../interfaces";
@@ -21,16 +21,25 @@ export const Pagos = () => {
 
   return (
     <div>
-      {pagos.length === 0 && <h3 className="my-3">No hay pagos registrados</h3>}
+      {pagos.length === 0 && (
+        <h3 className="my-3">
+          No hay pagos registrados, si ya realizaste un pago intenta refrescando
+          el navegador
+        </h3>
+      )}
       {pagos.map((x: iPago) => {
         debugger;
         return (
-          <h1>
-            {x.monto} {x.fecha}
-          </h1>
+          <div className="mt-4">
+            <label>
+              Fecha:{moment(x.fecha).format("MMMM Do YYYY, h:mm:ss a")}
+              <br></br>
+              Monto: ${x.monto}
+            </label>
+            <hr></hr>
+          </div>
         );
       })}
-      {/* // <ElementoCredito x={x} reload={getData}></ElementoCredito> */}
     </div>
   );
 };
