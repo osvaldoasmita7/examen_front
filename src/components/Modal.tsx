@@ -4,23 +4,31 @@ interface iProps {
   children: any;
 }
 export const Modal = ({ button, title, children }: iProps) => {
+  const random =
+    Math.floor(
+      Math.random() *
+        10000000000000000000000000000000000000000000000000000000000
+    ) + 1;
   return (
     <div>
-      <div data-bs-toggle="modal" data-bs-target="#exampleModal">
+      <div data-bs-toggle="modal" data-bs-target={`#exampleModal_${random}`}>
         {button}
       </div>
 
       <div
         className="modal fade"
-        id="exampleModal"
+        id={`exampleModal_${random}`}
         tabIndex={-1}
-        aria-labelledby="exampleModalLabel"
+        aria-labelledby={`exampleModalLabel_${random}`}
         aria-hidden="true"
       >
         <div className="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-xxl">
           <div className="modal-content">
             <div className="modal-header">
-              <h1 className="modal-title fs-5" id="exampleModalLabel">
+              <h1
+                className="modal-title fs-5"
+                id={`exampleModalLabel_${random}`}
+              >
                 {title}
               </h1>
               <button

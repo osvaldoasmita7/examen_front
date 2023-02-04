@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useClientes } from "../hooks/useClientes";
 import { iClients } from "../interfaces";
 import { InputCustom } from "../components/InputCustom";
+import moment from "moment";
 
 export const EditClient = () => {
   const navigate = useNavigate();
@@ -47,7 +48,7 @@ export const EditClient = () => {
           name="name"
           label="Fecha de creación"
           onChange={onChangeCliente}
-          value={cliente?.dateCreated}
+          value={moment(cliente?.dateCreated).format("MMMM Do YYYY, h:mm:ss a")}
           disabled={true}
         ></InputCustom>
         <input

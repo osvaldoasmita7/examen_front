@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Modal } from "./Modal";
+
 import { iCredito } from "../interfaces/credits.interface";
+
+import { Modal } from "./Modal";
 import { ElementoCredito } from "./ElementoCredito";
-import { InputNumberCustom } from "./InputNumberCustom";
 import { FormCredito } from "./FormCredito";
 import { useCreditos } from "../hooks/useCreditos";
 
@@ -19,6 +20,7 @@ export const Creditos = () => {
   const [creditos, setCreditos] = useState<iCredito[]>([]);
   const { traerCreditosCliente } = useCreditos();
   const getData = () => {
+    debugger;
     let resp = traerCreditosCliente(id || "");
     setCreditos([...resp]);
   };
@@ -40,7 +42,7 @@ export const Creditos = () => {
         <h3 className="my-3">No hay créditos registrados</h3>
       )}
       {creditos.map((x: iCredito) => (
-        <ElementoCredito {...x}></ElementoCredito>
+        <ElementoCredito x={x} reload={getData}></ElementoCredito>
       ))}
     </div>
   );

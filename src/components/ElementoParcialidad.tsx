@@ -1,11 +1,14 @@
-import React from "react";
 import { iParcialidad } from "../interfaces";
 import moment from "moment";
+import { Modal } from "./Modal";
+import { FormPago } from "./FormPago";
 interface iProps {
   x: iParcialidad;
   index: number;
+  reload?: () => void;
 }
-export const ElementoParcialidad = ({ x, index }: iProps) => {
+export const ElementoParcialidad = ({ x, index, reload }: iProps) => {
+  console.log("reloadparcialidad", reload);
   return (
     <li>
       <h5 className="mb-0 mt-3">Parcialidad {index + 1}</h5>
@@ -19,7 +22,18 @@ export const ElementoParcialidad = ({ x, index }: iProps) => {
         {x.cubierto ? "LIQUIDADO" : "PENDIENTE"}
       </small>
       <br></br>
-      {!x.cubierto && <button className="btn btn-success">Pagar</button>}
+      <Modal
+        button={
+          !x.cubierto && <button className="btn btn-success">Pagar</button>
+        }
+        title="Realizar pago"
+      >
+        <FormPago
+          montoAPagar={x.montoApagar}
+          idParcialidad={x.id}
+          reload={reload}
+        ></FormPago>
+      </Modal>
     </li>
   );
 };

@@ -13,12 +13,16 @@ export const useParcialidades = () => {
     let parcialidades: iParcialidad[] = JSON.parse(resp);
     let date = fechaPrestamo;
     const montoParcialidad = monto / numeroPagos;
-    debugger;
+
     for (let i = 0; i < numeroPagos; i++) {
-      debugger;
       date = moment(date).add(periodoDias, "days").format();
-      debugger;
+
+      let _id: number =
+        parcialidades[parcialidades.length > 0 ? parcialidades.length - 1 : 0]
+          ?.id || 0;
+      _id++;
       let parcialidad: iParcialidad = {
+        id: _id,
         cubierto: false,
         fechaLimite: date,
         idCredito,
