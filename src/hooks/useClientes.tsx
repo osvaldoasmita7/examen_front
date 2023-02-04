@@ -36,5 +36,41 @@ export const useClientes = () => {
     alert("Cliente eliminado con éxito");
     return true;
   };
-  return { nuevoCliente, eliminarCliente };
+  const traerCliente = (id: string) => {
+    let clients: iClients[] = [];
+    if (localStorage.getItem("clients")) {
+      let resp: string = localStorage.getItem("clients") || "[]";
+      clients = JSON.parse(resp);
+    }
+    let client: iClients | undefined = clients.find(
+      (x: iClients) => x.id === parseInt(id)
+    );
+
+    if (!client) {
+      alert("El cliente no existe");
+      return false;
+    }
+    return client;
+  };
+  const actualizarCliente = (data: iClients) => {
+    let clients: iClients[] = [];
+    if (!localStorage.getItem("clients")) {
+      alert(
+        "El registro no existe, regresa a la página inicial para registrarlo"
+      );
+      return false;
+    }
+    let resp: string = localStorage.getItem("clients") || "[]";
+    clients = JSON.parse(resp);
+    let index: number = clients.findIndex((x: iClients) => x.id === data.id);
+    if (index < 0) {
+      alert("El cliente no existe");
+      return false;
+    }
+    clients[index] = data;
+    localStorage.setItem("clients", JSON.stringify(clients));
+    alert("Cliente actualizado correctamente");
+    return true;
+  };
+  return { nuevoCliente, eliminarCliente, traerCliente, actualizarCliente };
 };

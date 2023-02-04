@@ -22,11 +22,13 @@ export const Table = ({
       x.options = (
         <div>
           <button
+            className="btn btn-primary mx-1"
             onClick={() => (onMoreFunction ? onMoreFunction(x.id) : () => {})}
           >
             Más info
           </button>
           <button
+            className="btn btn-secondary mx-1"
             onClick={() =>
               onDeleteFunction ? onDeleteFunction(x.id) : () => {}
             }

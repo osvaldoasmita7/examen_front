@@ -24,7 +24,6 @@ export const HomePage = () => {
     onChangeCliente();
   };
   const showMore = (id: number) => {
-    debugger;
     return navigate(`/client/${id}`);
   };
   return (
@@ -50,7 +49,7 @@ export const HomePage = () => {
             sortable: true,
           },
           {
-            name: "Más",
+            name: "Opciones",
             selector: (row: any) => row.options,
           },
         ]}
